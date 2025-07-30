@@ -1,5 +1,7 @@
 import './globals.css'
 
+import { Toaster } from "@/components/ui/sonner"
+
 export default function IndexLayout({
     children,
 }: {
@@ -9,6 +11,7 @@ export default function IndexLayout({
         <html lang="en">
             <body>
                 <main>{children}</main>
+                <Toaster />
             </body>
         </html>
     )
