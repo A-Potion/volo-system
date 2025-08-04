@@ -13,6 +13,10 @@ const eventSchema = new mongoose.Schema({
     end: {
         type: Date,
         required: true,
+    },
+    owner: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true,
     }
 })
 

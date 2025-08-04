@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { toast } from 'sonner'
 import { useState, useEffect } from 'react'
+import { authClient } from "@/lib/auth/auth-client"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -24,14 +25,19 @@ const formSchema = z.object({
   end: z.string().min(1, "End date is required"),
 })
 
+
+
 export function NewEventForm() {
 const [events, setEvents] = useState([])
+
+  
 
 
   const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
       defaultValues: {
         name: "",
+
       },
         }
       )
@@ -39,7 +45,9 @@ const [events, setEvents] = useState([])
   
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      
       toast.success('work')
+      console.log(values)
       await fetch('/api/events', {
         method: 'POST',
         headers: {
