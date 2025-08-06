@@ -10,7 +10,8 @@ export default function IndexLayout({
     return (
         <html lang="en">
             <body>
-                <main>{children}</main>
+
+                <main className='h-screen w-screen bg-slate-300'>{children}</main>
                 <Toaster />
             </body>
         </html>

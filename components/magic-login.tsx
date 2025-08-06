@@ -36,11 +36,17 @@ const formSchema = z.object({
 })
 
 
+type LoginFormProps = React.ComponentProps<"div"> & {
+  callback?: string;
+  desc?: string;
+};
 
 export function LoginForm({
   className,
+  callback,
+  desc,
   ...props
-}: React.ComponentProps<"div">) {
+}: LoginFormProps ) {
     // 1. Define your form.
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter()
@@ -56,7 +62,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
     await signIn.magicLink(
         {email: values.email,
             name: values.email,
-            callbackURL: '/dashboard',
+            callbackURL: callback || '/dashboard',
         },
         {
             onRequest: () => setIsLoading(true),
@@ -73,9 +79,10 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
   }
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="outline-solid outline-violet-700">
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome</CardTitle>
+          <CardDescription>{desc}</CardDescription>
         </CardHeader>
         <CardContent>
               <Form {...form}>
@@ -100,7 +107,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
                   )}
                 />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button className="bg-violet-700 w-full hover:bg-violet-900" type="submit" disabled={isLoading}>
                   {isLoading ? <Loader2 className='animate-spin size-4' />  : "Send me a link" }
                 </Button>
               </div>

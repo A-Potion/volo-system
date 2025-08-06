@@ -7,7 +7,16 @@ import { toast } from 'sonner'
 import { useState, useEffect } from 'react'
 import { authClient } from "@/lib/auth/auth-client"
 import { Loader2 } from "lucide-react"
-
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   Card,
   CardAction,
@@ -38,7 +47,7 @@ const formSchema = z.object({
 
 
 
-export function NewEventForm() {
+export function NewEventDialog() {
 const [events, setEvents] = useState([])
 const [isLoading, setIsLoading] = useState(false)
 
@@ -88,13 +97,19 @@ const [isLoading, setIsLoading] = useState(false)
   
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create a new event</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <Dialog>
+      <DialogTrigger asChild>
+          <Button className="bg-violet-700 w-full hover:bg-violet-900">New event</Button>
+        </DialogTrigger>
+      <div >
+      <DialogContent className="sm:max-w-[25%]">
+        <DialogHeader className="items-center">
+        <DialogTitle>Create a new event</DialogTitle>
+      </DialogHeader>
+        
     <Form {...form}>
-      <form className='flex items-center justify-center space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
+      
+      <form className='flex items-center justify-center' onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid gap-6">
         <div className="grid gap-3">
         <FormField
@@ -141,14 +156,19 @@ const [isLoading, setIsLoading] = useState(false)
           )}
         />
         </div>
-        <div className="grid gap-3">
-      
-          <Button type="submit">{ isLoading ? ( <Loader2 className='animate-spin size-4' /> ) : ( "Create" ) }</Button>
+        <DialogFooter>
+        <div className="items-center justify-center flex-row">
+          <DialogClose asChild>
+              <Button className="min-w-1/3" variant="outline">Cancel</Button>
+            </DialogClose>
+          <Button className="min-w-1/3" type="submit">{ isLoading ? ( <Loader2 className='animate-spin size-4' /> ) : ( "Create" ) }</Button>
         </div>
+        </DialogFooter>
         </div>
       </form>
     </Form>
-    </CardContent>
-    </Card>
+    </DialogContent>
+    </div>
+    </Dialog>
   )
 }

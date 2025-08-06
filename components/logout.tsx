@@ -25,8 +25,10 @@ export function Logout() {
     }
   };
 return (
-    <Button variant='outline' onClick={handleLogout}>
+  <div>
+    <Button variant='outline'  className = "outline-solid outline-violet-700 flex-row bg-white text-violet-700 hover:outline-none hover:bg-violet-700 hover:text-white" onClick={handleLogout}>
         Logout <LogOut className='size-4' />
     </Button>
+    </div>
 );
 }
