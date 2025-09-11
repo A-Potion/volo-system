@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { usePathname } from 'next/navigation'
 import { DeleteDialog } from '@/components/delete-confirm';
+import { VoloTable } from '@/components/volos-table';
 
 export default function EventPage() {
 
@@ -53,6 +54,7 @@ export default function EventPage() {
       <h1>{eventInfo.name}</h1>
       <h2>{getNormalDate(eventInfo.start)} '-&gt;' {getNormalDate(eventInfo.end)}</h2>
       <p>lipsum</p>
+      <VoloTable info={eventInfo} />
       <DeleteDialog name={eventInfo.name} id={params.id} />
       <Link href={`${pathNow}/volunteer`}>
       <Button>

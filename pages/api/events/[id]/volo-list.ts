@@ -16,9 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if (!event) {
                     res.redirect('/404')
                 }
-                const { volunteers, ...safeEvent } = event;
-                console.log(safeEvent)
-                res.status(200).json({ success: true, data: safeEvent._doc})
+                res.status(200).json({ success: true, data: event.volunteers})
             } catch (error) {
                 res.status(404).json({ success: false })
                 console.log(error)
