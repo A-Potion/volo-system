@@ -10,13 +10,13 @@ import {
 
 import { useState, useEffect } from "react"
 import { authClient } from "@/lib/auth/auth-client";
+import { getCoolDate } from "@/lib/toolets/ddmmyyyy";
 
 
 type VolunteerTableProps = React.ComponentProps<"div"> & {
   info?: object;
 };
 const { data: session } = await authClient.getSession()
-
 
 
 export function VoloTable({ info,
@@ -42,7 +42,7 @@ export function VoloTable({ info,
                   <TableRow key={volo.name}>
                         <TableCell>{volo.name}</TableCell>
                         <TableCell>{volo.email}</TableCell>
-                        <TableCell className='text-right'>{volo.dob}</TableCell>
+                        <TableCell className='text-right'>{getCoolDate(volo.dob)}</TableCell>
                     </TableRow>
                 ))
             }
