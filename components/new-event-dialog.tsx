@@ -99,7 +99,7 @@ const [isLoading, setIsLoading] = useState(false)
   return (
     <Dialog>
       <DialogTrigger asChild>
-          <Button className="bg-violet-700 w-full hover:bg-violet-900">New event</Button>
+          <Button className="bg-violet-700 w-full hover:bg-violet-900">Create a new event</Button>
         </DialogTrigger>
       <div >
       <DialogContent className="sm:max-w-[25%]">

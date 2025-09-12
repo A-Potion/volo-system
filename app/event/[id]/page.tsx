@@ -9,11 +9,13 @@ import { usePathname } from 'next/navigation'
 import { DeleteDialog } from '@/components/delete-confirm';
 import { VoloTable } from '@/components/volos-table';
 import { EventInfoTable } from '@/components/event-info-table';
+import { CopyLinkDialog } from '@/components/copy-link';
 
 export default function EventPage() {
 
   const [eventInfo, setEventInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
+  const [isOwner, setIsOwner] = useState(false)
 
   useEffect(() => {
     fetchEventInfo();
@@ -30,8 +32,11 @@ export default function EventPage() {
     const data = await res.json();
 
     setEventInfo(data.data);
+
+    setIsOwner(data.isOwner)
     
     setIsLoading(false)
+    console.log(data)
   };
 
     
@@ -55,12 +60,19 @@ export default function EventPage() {
       <h1 className='text-center text-6xl mb-8'>{eventInfo.name}</h1>
       <EventInfoTable info={eventInfo} />
       <VoloTable info={eventInfo} />
-      <div className="flex gap-4 left-4">
-      <DeleteDialog name={eventInfo.name} id={params.id} />
-      <Link href={`${pathNow}/volunteer`}>
+      <div className="flex flex-center justify-center gap-4 left-4">
+      {
+        isOwner ? (
+          <div className="flex flex-center justify-center gap-4 left-4">
+        <DeleteDialog name={eventInfo.name} id={params.id} />
+        <CopyLinkDialog whatto={`${eventInfo.name} volunteer form`} lnk={`${location.host}${pathNow}/volunteer`} />
+        </div>
+        ) : (
+        <Link href={`${pathNow}/volunteer`}>
       <Button>
         Volunteer at this event</Button>
-        </Link>
+        </Link>)
+        }
         </div>
       </div>
       </>

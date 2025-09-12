@@ -37,13 +37,13 @@ const formSchema = z.object({
 })
 
 
+const [isLoading, setIsLoading] = useState(false);
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
     // 1. Define your form.
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

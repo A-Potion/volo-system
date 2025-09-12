@@ -16,8 +16,7 @@ export default function Dashboard() {
         <Logout />
         </div>
 <div className = 'flex flex-col items-center justify-center h-screen'>
-    <h1>Welcome to Volo System</h1>
-    <div className = 'flex flex-row items-center justify-center gap-4'>
+    <div className = 'flex flex-row items-center justify-center mb-4'>
         {/* <Link href='/new-event'>
         <Button>New event</Button>
         </Link> */}

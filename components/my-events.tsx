@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import EventCard from "./eventclick-card";
 
 export default function MyEvents() {
 
@@ -42,28 +43,31 @@ export default function MyEvents() {
   </TabsList>
   <TabsContent value="owned">
     { events.length>0 ? ( 
-        <div>
-      <ul>
+        <div className="flex gap-3">
+      {/* <ul> */}
         {events.map((event) => (
-          <li key={event._id}>
-            <Link target='_blank' href={`event/${event._id}`}> {event.name} - {getNormalDate(event.start)} - {getNormalDate(event.end)} </Link>
-          </li>
+          // <li key={event._id}>
+          //   <Link target='_blank' href={`event/${event._id}`}> {event.name} - {getNormalDate(event.start)} - {getNormalDate(event.end)} </Link>
+          // </li>
+
+          <EventCard className="flex" key={event._id} name={event.name} start={getNormalDate(event.start)} end={getNormalDate(event.end)} id={event._id} />
         ))}
-      </ul>
+      {/* </ul> */}
       </div> 
       ) : <p>You do not own any events.</p>
 }
   </TabsContent>
   <TabsContent value="volunteer">
     { voloEvents.length>0 ? (
-      <div>
-      <ul>
+      <div className="flex gap-3">
+      {/* <ul> */}
         {voloEvents.map((event) => (
-          <li key={event._id}>
-            <Link target='_blank' href={`event/${event._id}`}> {event.name} - {getNormalDate(event.start)} - {getNormalDate(event.end)} </Link>
-          </li>
+          // <li key={event._id}>
+          //   <Link target='_blank' href={`event/${event._id}`}> {event.name} - {getNormalDate(event.start)} - {getNormalDate(event.end)} </Link>
+          // </li>
+          <EventCard className="flex" key={event._id} name={event.name} start={getNormalDate(event.start)} end={getNormalDate(event.end)} id={event._id} />
         ))}
-      </ul>
+      {/* </ul> */}
       </div>
       ) : (
         <h1>You are not volunteering at any events.</h1>
