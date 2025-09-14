@@ -39,7 +39,7 @@ export function VoloTable({ info,
   <TableBody>
       {
                 volos.map((volo) => (
-                  <TableRow key={volo.name}>
+                  <TableRow key={volo.userid}>
                         <TableCell>{volo.name}</TableCell>
                         <TableCell>{volo.email}</TableCell>
                         <TableCell className='text-right'>{getCoolDate(volo.dob)}</TableCell>

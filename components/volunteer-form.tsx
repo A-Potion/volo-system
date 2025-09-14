@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { authClient } from "@/lib/auth/auth-client";
+import { authClient } from "@/lib/auth/auth-client"
+
 import { useForm } from "react-hook-form"
 import Link from 'next/link'
 import {
@@ -42,7 +43,6 @@ const formSchema = z.object({
   dob: z.string().min(1, "Date of birth is required."),
 })
 
-  const { data: session } = await authClient.getSession()
 
   type VolunteerFormProps = React.ComponentProps<"div"> & {
   id?: string;
@@ -55,19 +55,37 @@ export function VolunteerForm({
 }: VolunteerFormProps) {
     // 1. Define your form.
   const router = useRouter()
+  const [session, setSession] = useState<any>(null)
+  const [sessionIsLoading, setSessionIsLoading] = useState(true)
+  const [eventInfo, setEventInfo] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(true)
+ 
+  const pathRn = usePathname()
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: session?.user.email,
+      email: "",
+      name: "",
+      dob: "",
     },
   })
 
-  const [eventInfo, setEventInfo] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
- 
-   useEffect(() => {
-    fetchEventInfo();
-  }, []);
+  useEffect(() => {
+    const fetchSession = async () => {
+      const { data: sessionData } = await authClient.getSession()
+      setSession(sessionData)
+      setSessionIsLoading(false)
+      if (sessionData?.user?.email) {
+        form.setValue("email", sessionData.user.email)
+      }
+    }
+    fetchSession()
+  }, [])
+
+  
+   
 
   const fetchEventInfo = async () => {
     const res = await fetch(`/api/events/${id}/view`);
@@ -80,6 +98,10 @@ export function VolunteerForm({
     
     setIsLoading(false)
   };
+
+  useEffect(() => {
+    fetchEventInfo();
+  }, [id]);
 
   // 2. Define a submit handler.
 const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -104,18 +126,32 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
     }
   }
 
+if (sessionIsLoading) {
+  return (
+    <div className="flex justify-center items-center h-32">
+      <Loader2 className="animate-spin size-6" />
+    </div>
+  );
+}
+
+// Only render LoginForm after session is loaded
+if (!session && !sessionIsLoading) {
+  return (
+    <LoginForm callback={pathRn} desc="To sign up for volunteering, you must log in first."/>
+  );
+}
+
 
   return (
     <div>
-        { session ? (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+          <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="outline-none border-none text-center">
           <CardTitle className="outline-none border-none text-xl">Sign up to volunteer at {eventInfo.name}</CardTitle>
         </CardHeader>
         <CardContent className="outline-none border-none text-center">
               <Form {...form}>
-      <form className="border-none outline-none" onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form className="border-none outline-none space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid gap-6 outline-none border-none">
 
               <div className=" relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center border-none">
@@ -183,10 +219,6 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
         and <a href="#">Privacy Policy</a>.
       </div>
     </div>
-    ) : (
-        <LoginForm callback={usePathname()} desc="To sign up for volunteering, you must log in first."/>
-    )
-    }
     </div>
   )
 }

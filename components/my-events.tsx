@@ -33,24 +33,22 @@ export default function MyEvents() {
     const datey = new Date(timestamp)
     return datey.toDateString()
   }
-
   return(
-    <div className="flex items-center justify-center">
-    <Tabs className="flex w-[300px] flex-col" defaultValue="owned" className="w-[400px]">
+    <Tabs className="flex items-center flex-wrap" defaultValue="owned" className="w-[400px]">
   <TabsList className="flex shrink-0 gap-2 bg-inherit">
     <TabsTrigger className="flex h-[40px] flex-1 cursor-default items-center justify-center bg-white px-5 text-[15px] leading-none text-violet-700 outline-solid outline-violet-700 first:rounded-tl-md last:rounded-tr-md hover:bg-violet-200 data-[state=active]:text-white data-[state=active]:focus:relative data-[state=active]:bg-violet-700" value="owned">Owned events</TabsTrigger>
     <TabsTrigger className="flex h-[40px] flex-1 cursor-default items-center justify-center bg-white px-5 text-[15px] leading-none text-violet-700 outline-solid outline-violet-700 first:rounded-tl-md last:rounded-tr-md hover:bg-violet-200 data-[state=active]:text-white data-[state=active]:focus:relative data-[state=active]:bg-violet-700" value="volunteer">Events where you volunteer</TabsTrigger>
   </TabsList>
   <TabsContent value="owned">
     { events.length>0 ? ( 
-        <div className="flex gap-3">
+        <div className="flex gap-2 flex-col items-center">
       {/* <ul> */}
         {events.map((event) => (
           // <li key={event._id}>
           //   <Link target='_blank' href={`event/${event._id}`}> {event.name} - {getNormalDate(event.start)} - {getNormalDate(event.end)} </Link>
           // </li>
 
-          <EventCard className="flex" key={event._id} name={event.name} start={getNormalDate(event.start)} end={getNormalDate(event.end)} id={event._id} />
+          <EventCard key={event._id} name={event.name} start={getNormalDate(event.start)} end={getNormalDate(event.end)} id={event._id} />
         ))}
       {/* </ul> */}
       </div> 
@@ -59,16 +57,17 @@ export default function MyEvents() {
   </TabsContent>
   <TabsContent value="volunteer">
     { voloEvents.length>0 ? (
-      <div className="flex gap-3">
+      <div className="flex gap-2 flex-col items-center">
       {/* <ul> */}
         {voloEvents.map((event) => (
           // <li key={event._id}>
           //   <Link target='_blank' href={`event/${event._id}`}> {event.name} - {getNormalDate(event.start)} - {getNormalDate(event.end)} </Link>
           // </li>
-          <EventCard className="flex" key={event._id} name={event.name} start={getNormalDate(event.start)} end={getNormalDate(event.end)} id={event._id} />
+
+          <EventCard key={event._id} name={event.name} start={getNormalDate(event.start)} end={getNormalDate(event.end)} id={event._id} />
         ))}
       {/* </ul> */}
-      </div>
+      </div> 
       ) : (
         <h1>You are not volunteering at any events.</h1>
       )}
@@ -76,5 +75,4 @@ export default function MyEvents() {
   </TabsContent>
 </Tabs>
 
-</div>
       )

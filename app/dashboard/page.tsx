@@ -15,20 +15,16 @@ export default function Dashboard() {
         <div className="absolute top-4 right-4">
         <Logout />
         </div>
-<div className = 'flex flex-col items-center justify-center h-screen'>
-    <div className = 'flex flex-row items-center justify-center mb-4'>
-        {/* <Link href='/new-event'>
-        <Button>New event</Button>
-        </Link> */}
-        <NewEventDialog />
-        {/* <Link href='/my-events'>
-        <Button>My events</Button>
-        </Link> */}
-    </div>
-    
+        <div className="flex flex-col justify-between items-center min-h-screen">
+<div className="flex flex-col items-center justify-center min-h-screen">
+  <NewEventDialog />
+  <div className="mt-8 flex flex-col items-center w-full">
     <MyEvents />
-    </div>
-    </div>
+  </div>
+</div>
+</div>
+
+</div>
     
     )
 }

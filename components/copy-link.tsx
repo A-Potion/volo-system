@@ -19,7 +19,9 @@ export function CopyLinkDialog({whatto, lnk}: string) {
     return(
         <div>
           <Dialog>
-  <DialogTrigger><Button>Get volunteer sign-up link</Button></DialogTrigger>
+  <DialogTrigger asChild>
+    <Button>Get volunteer sign-up link</Button>
+    </DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle>Link to {whatto}.</DialogTitle>

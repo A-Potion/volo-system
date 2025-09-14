@@ -11,12 +11,14 @@ import Link from "next/link"
 
 export default function EventCard({name, start, end, id}: string) {
     return(
-        <Card className="flex flex-grow">
+      <div className=" min-w-60">
+        <Card>
   <CardHeader>
     <CardTitle>{name}</CardTitle>
     <CardDescription>{start} — {end}</CardDescription>
     <CardAction><Link href={`event/${id}`}>View</Link></CardAction>
   </CardHeader>
 </Card>
+</div>
     )
 }

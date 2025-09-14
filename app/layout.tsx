@@ -11,7 +11,7 @@ export default function IndexLayout({
         <html lang="en">
             <body>
 
-                <main className='h-screen w-screen bg-slate-300'>{children}</main>
+                <main className='min-h-screen w-screen bg-slate-300'>{children}</main>
                 <Toaster />
             </body>
         </html>

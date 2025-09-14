@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+import { getCoolDate } from "@/lib/toolets/ddmmyyyy";
 import { useState, useEffect } from "react"
 import { authClient } from "@/lib/auth/auth-client";
 
@@ -17,20 +18,12 @@ type TableProps = React.ComponentProps<"div"> & {
 };
 const { data: session } = await authClient.getSession()
 
-function getCoolDate(oldTimestamp) {
-  let timestamp = new Date(oldTimestamp)
-  let day = timestamp.getDate()
-  let month = timestamp.getMonth()
-  let year = timestamp.getFullYear()
-  return (`${day}/${month}/${year}`)
-}
 
 
 export function EventInfoTable({ info,
   ...props
 }: TableProps ) {
 
-    console.log(typeof(info))
 
   const eventinfo = info
 
