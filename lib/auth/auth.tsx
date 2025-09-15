@@ -8,7 +8,7 @@ import { transporter } from "@/lib/mailtransporter";
 import { MagicMail } from "@/react-email-starter/emails/magicLink";
 import { render, pretty } from '@react-email/render'
 
-const client = new MongoClient(process.env.MONGODB_URI);
+const client = new MongoClient(process.env.MONGODB_URI || '');
 const db = client.db();
  
 export const auth = betterAuth({

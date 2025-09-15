@@ -9,9 +9,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { method } = req;
     const { id } = req.query
     
-    const session = await auth.api.getSession({
-        headers: req.headers
-    })
+ const session = await auth.api.getSession({
+    headers: new Headers(
+      Object.entries(req.headers).map(([key, value]) => [
+        key,
+        Array.isArray(value) ? value.join(', ') : value ?? ''
+      ])
+    )
+  });
 
     if ( method === 'DELETE' ) {
             try {

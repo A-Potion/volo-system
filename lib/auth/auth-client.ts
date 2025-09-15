@@ -6,7 +6,7 @@ export const authClient = createAuthClient({
     plugins: [
         magicLinkClient(),
     ],
-    baseURL: 'https://demo.kacperwypych.com'
+    baseURL: 'http://localhost:3000'
 })
 
 export const {

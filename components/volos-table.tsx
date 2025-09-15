@@ -14,16 +14,26 @@ import { getCoolDate } from "@/lib/toolets/ddmmyyyy";
 
 
 type VolunteerTableProps = React.ComponentProps<"div"> & {
-  info?: object;
+  info?: Info;
 };
 const { data: session } = await authClient.getSession()
 
+type Volunteer = {
+  userid: string;
+  name: string;
+  email: string;
+  dob: string;
+};
+
+type Info = {
+  volunteers: Volunteer[];
+};
 
 export function VoloTable({ info,
   ...props
 }: VolunteerTableProps ) {
 
-  const volos = info.volunteers
+  const volos = info?.volunteers || []
 
     return(
         <div>

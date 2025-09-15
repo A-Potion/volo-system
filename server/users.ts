@@ -1,5 +1,6 @@
 "use server";
 import { auth } from "@/lib/auth/auth"
+import { headers } from "next/headers";
  
 export const signIn = async (email: string, password: string) => {
     try { await auth.api.signInEmail({
@@ -29,8 +30,6 @@ export const linkIn = async (email: string) => {
         email: "user@email.com", // required
         name: "my-name",
         callbackURL: "/dashboard",
-        newUserCallbackURL: "/welcome",
-        errorCallbackURL: "/error",
     },
     // This endpoint requires session cookies.
     headers: await headers(),

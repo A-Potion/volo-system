@@ -6,7 +6,7 @@ import Event from '@/models/Event'
 import { betterAuth } from "better-auth"
 import { authClient } from '@/lib/auth/auth-client';
 import { headers } from 'next/headers'
-import Volunteer from '@/models/Volunteer'
+import Volunteer from '@/models/Event'
 import { auth } from '@/lib/auth/auth'
 
 export default async function handler(req: NextApiRequest,
@@ -17,9 +17,14 @@ export default async function handler(req: NextApiRequest,
 
     const { method } = req;
     const { id } = req.query
-    const session = await auth.api.getSession({
-    headers: req.headers
-})
+ const session = await auth.api.getSession({
+    headers: new Headers(
+      Object.entries(req.headers).map(([key, value]) => [
+        key,
+        Array.isArray(value) ? value.join(', ') : value ?? ''
+      ])
+    )
+  });
 
     console.log(session)
     

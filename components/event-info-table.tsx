@@ -13,8 +13,13 @@ import { useState, useEffect } from "react"
 import { authClient } from "@/lib/auth/auth-client";
 
 
+interface EventInfo {
+    start: string,
+    end: string,
+  }
+
 type TableProps = React.ComponentProps<"div"> & {
-  info?: object;
+  info?: EventInfo | null;
 };
 const { data: session } = await authClient.getSession()
 
@@ -23,6 +28,7 @@ const { data: session } = await authClient.getSession()
 export function EventInfoTable({ info,
   ...props
 }: TableProps ) {
+
 
 
   const eventinfo = info
@@ -39,8 +45,14 @@ export function EventInfoTable({ info,
   </TableHeader>
   <TableBody>
     <TableRow>
-        <TableCell>{getCoolDate(eventinfo.start)}</TableCell>
-        <TableCell>{getCoolDate(eventinfo.end)}</TableCell>
+      {eventinfo?.start && eventinfo?.end ? (
+        <>
+          <TableCell>{getCoolDate(eventinfo.start)}</TableCell>
+          <TableCell>{getCoolDate(eventinfo.end)}</TableCell>
+        </>
+      ) : (
+        <TableCell colSpan={2}>No event information available</TableCell>
+      )}
     </TableRow>
   </TableBody>
 </Table>

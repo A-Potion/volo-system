@@ -10,7 +10,12 @@ import {
 import { Button } from "./ui/button"
 import { toast } from "sonner"
 
-export function CopyLinkDialog({whatto, lnk}: string) {
+type CopyLinkProps = {
+  lnk: string;
+  whatto: string;
+};
+
+export function CopyLinkDialog({ whatto, lnk }: CopyLinkProps) {
   function CopyLinkButton() {
     navigator.clipboard.writeText(lnk)
     toast.success("Copied to clipboard!")
@@ -26,7 +31,7 @@ export function CopyLinkDialog({whatto, lnk}: string) {
     <DialogHeader>
       <DialogTitle>Link to {whatto}.</DialogTitle>
       <DialogDescription>
-        It's: {lnk}. 
+        It&apos;s: {lnk}. 
       </DialogDescription>
     </DialogHeader>
     <DialogFooter>

@@ -9,9 +9,18 @@ import {
 } from "@/components/ui/card"
 import Link from "next/link"
 
-export default function EventCard({name, start, end, id}: string) {
+type EventCardProps = {
+  name: string,
+  start: string,
+  end: string,
+  id: string
+}
+
+export default function EventCard({ name, start, end, id,
+  ...props
+}: EventCardProps) {
     return(
-      <div className=" min-w-60">
+      <div className="min-w-60">
         <Card>
   <CardHeader>
     <CardTitle>{name}</CardTitle>

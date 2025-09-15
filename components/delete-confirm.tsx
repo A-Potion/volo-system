@@ -15,8 +15,13 @@ import { redirect } from "next/navigation"
 import { toast } from "sonner"
 
 
+interface DeleteDialogProps {
+  name: string;
+  id: string | string[];
+}
 
-export function DeleteDialog({ name, id }: String) {
+
+export function DeleteDialog({ name, id }: DeleteDialogProps) { {
 
     async function deleteEvent() {
         const res = await fetch(`/api/events/${id}/delete`, {
@@ -55,4 +60,4 @@ export function DeleteDialog({ name, id }: String) {
       </form>
     </Dialog>
   )
-}
+}}

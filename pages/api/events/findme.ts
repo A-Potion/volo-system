@@ -16,8 +16,13 @@ export default async function handler(req: NextApiRequest,
 
     const { method } = req;
     const session = await auth.api.getSession({
-    headers: req.headers
-})
+    headers: new Headers(
+      Object.entries(req.headers).map(([key, value]) => [
+        key,
+        Array.isArray(value) ? value.join(', ') : value ?? ''
+      ])
+    )
+  });
 
     console.log(session)
     

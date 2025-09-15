@@ -9,10 +9,12 @@ if (!MONGODB_URI) {
 /** 
  * Cached connection for MongoDB.
  */
-let cached = global.mongoose;
+
+
+let cached = (global as any).mongoose
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+  cached = (global as any).mongoose = { conn: null, promise: null };
 }
 
 async function dbConnect() {
@@ -21,7 +23,7 @@ async function dbConnect() {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).then((mongoose) => {
+    cached.promise = mongoose.connect(MONGODB_URI || '').then((mongoose) => {
       return mongoose;
     });
   }

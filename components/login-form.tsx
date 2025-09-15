@@ -37,7 +37,7 @@ const formSchema = z.object({
 })
 
 
-const [isLoading, setIsLoading] = useState(false);
+
 
 export function LoginForm({
   className,
@@ -52,6 +52,7 @@ export function LoginForm({
       password: "",
     },
   })
+  const [isLoading, setIsLoading] = useState(false);
  
   // 2. Define a submit handler.
 async function onSubmit(values: z.infer<typeof formSchema>) {
