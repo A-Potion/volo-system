@@ -6,7 +6,7 @@ export const authClient = createAuthClient({
     plugins: [
         magicLinkClient(),
     ],
-    baseURL: 'http://hackclub.app:40451'
+    baseURL: 'https://volo-system.wacper.hackclub.app'
 })
 
 export const {
