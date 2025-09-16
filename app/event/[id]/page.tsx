@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { redirect, useParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
+import { Logout } from '@/components/logout';
 import { usePathname } from 'next/navigation'
 import { DeleteDialog } from '@/components/delete-confirm';
 import { VoloTable } from '@/components/volos-table';
@@ -84,6 +85,7 @@ useEffect(() => {
       <div>
       {eventInfo && (
   <>
+  
     <h1 className='text-center text-6xl mb-8'>{eventInfo.name}</h1>
     <EventInfoTable info={eventInfo} />
     <VoloTable info={eventInfo} />
@@ -92,12 +94,17 @@ useEffect(() => {
       <div className="flex flex-center justify-center gap-4 left-4">
       {
         isOwner ? (
+          <>
+          <div className="absolute top-4 right-4">
+                  <Logout />
+                  </div>
           <div className="flex flex-center justify-center gap-4 left-4">
         {eventInfo && params?.id && (
   <DeleteDialog name={eventInfo.name} id={params?.id || '404'} />
 )}
         <CopyLinkDialog whatto={`${eventInfo?.name || 'unnamed'} volunteer form`} lnk={`${location.host}${pathNow}/volunteer`} />
         </div>
+        </>
         ) : (
         <Link href={`${pathNow}/volunteer`}>
       <Button>
