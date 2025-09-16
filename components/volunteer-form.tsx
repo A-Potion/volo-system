@@ -82,7 +82,7 @@ export function VolunteerForm({
       }
     }
     fetchSession()
-  })
+  }, [])
 
   
    
@@ -101,7 +101,7 @@ export function VolunteerForm({
 
   useEffect(() => {
     fetchEventInfo();
-  });
+  }, [id]);
 
   // 2. Define a submit handler.
 const onSubmit = async (values: z.infer<typeof formSchema>) => {
