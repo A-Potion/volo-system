@@ -12,9 +12,6 @@ export default function Dashboard() {
 
     return(
       <div>
-        <div className="absolute top-4 right-4">
-        <Logout />
-        </div>
         <div className="flex flex-col justify-between items-center min-h-screen">
 <div className="flex flex-col items-center justify-center min-h-screen">
   <NewEventDialog />

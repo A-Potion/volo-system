@@ -11,7 +11,7 @@ import { DeleteDialog } from '@/components/delete-confirm';
 import { VoloTable } from '@/components/volos-table';
 import { EventInfoTable } from '@/components/event-info-table';
 import { CopyLinkDialog } from '@/components/copy-link';
-
+import ExportCSV from '@/components/export-volos';
 
 
 export default function EventPage() {
@@ -95,15 +95,13 @@ useEffect(() => {
       {
         isOwner ? (
           <>
-          <div className="absolute top-4 right-4">
-                  <Logout />
-                  </div>
           <div className="flex flex-center justify-center gap-4 left-4">
         {eventInfo && params?.id && (
   <DeleteDialog name={eventInfo.name} id={params?.id || '404'} />
 )}
         <CopyLinkDialog whatto={`${eventInfo?.name || 'unnamed'} volunteer form`} lnk={`${location.host}${pathNow}/volunteer`} />
         </div>
+        <ExportCSV fileName={`${eventInfo?.name}_volunteers.csv` || 'volunteers.csv'} data={eventInfo.volunteers || [null]} />
         </>
         ) : (
         <Link href={`${pathNow}/volunteer`}>

@@ -18,9 +18,13 @@ export default function IndexLayout({
 }) {
       const [session, setSession] = useState<any>(null)
         useEffect(() => {
-      const fetchSession = async () => {
-        const { data: sessionData } = await authClient.getSession()
-        setSession(sessionData)
+    const fetchSession = async () => {
+        try {
+            const { data: sessionData } = await authClient.getSession()
+            setSession(sessionData)
+        } catch (error) {
+            console.log("Not logged in.")
+        }
       }
       fetchSession()
     }, [])
