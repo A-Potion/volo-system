@@ -9,7 +9,7 @@ A (future) all-in-one platform for:
 
 ### Experience it at https://volo-system.wacper.hackclub.app
 
-## Current features:
+## Current features deployed:
 
 - Sign in with a magic email link.
 - Create an event with a name & a date.
@@ -18,6 +18,9 @@ A (future) all-in-one platform for:
 - Fill out the form.
 - Event owner view of signed-up volunteers.
 - You also can delete the event.
+
+## WIP features:
+- Export volunteer list to CSV.
 
 ## AI usage
 
